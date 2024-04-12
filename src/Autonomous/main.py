@@ -8,6 +8,7 @@ def getGPSCoordinates(GPSLoc):
        Input: JSON file location
        Output: GPS coordinates array
     '''
+    
     pass
 
 def calculateHeading(visual=False, GLL: list[list[float]]=None, pixLoc=None):
