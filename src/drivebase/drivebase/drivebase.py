@@ -30,6 +30,13 @@ class Drivebase(Node):
             Float32, "move_left_drivebase_side_message", self.moveLeftSide, 10)
         self.right_subscription = self.create_subscription(
             Float32, "move_right_drivebase_side_message", self.moveRightSide, 10)
+        
+        # Used for turning. Not to be used with controller, but for autonomous navigation
+        self.right_turn_subscription = self.create_subscription(
+            Float32, "turn_right_drivebase", self.turnRight, 10)
+
+        self.left_turn_subscription = self.create_subscription(
+            Float32, "turn_left_drivebase", self.turnRight, 10)
 
     def moveLeftSide(self, msg):
         vel = msg.data * self.SPEED
