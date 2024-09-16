@@ -2,6 +2,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//FreeRTOS
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+TaskHandle_t helloWorldTaskHandle;
+
+void helloWorld(void *param)
+{
+
+    while (true){
+    sleep_ms(1000);
+    printf("This means that freertos is working");
+    sleep_ms(1000);
+    }
+}
 
 int main(int argc, char** argv) {
     stdio_init_all();
@@ -16,6 +32,10 @@ int main(int argc, char** argv) {
         sleep_ms(1000);
         printf("%d \n", index);
     }
+
+    xTaskCreate(helloWorld, "HELLO_WORLD_TASK",128,NULL, 1, &helloWorldTaskHandle);
+
+    vTaskStartScheduler();
 
     return 0;
 }

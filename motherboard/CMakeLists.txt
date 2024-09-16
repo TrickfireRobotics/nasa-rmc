@@ -5,6 +5,9 @@ cmake_minimum_required(VERSION 3.12)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+include (FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/pico_sdk_import.cmake)
+include (FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
+
 # Include the pico-sdk stuff
 include("../pico-sdk/external/pico_sdk_import.cmake")
 
@@ -28,7 +31,9 @@ pico_enable_stdio_uart(${PROJECT_NAME} 0)
 
 # Pull in our pico_stdlib which pulls in commonly used features (gpio, timer-delay etc)
 target_link_libraries(${PROJECT_NAME}
-    pico_stdlib
+    pico_stdlib 
+    FreeRTOS-Kernel 
+    FreeRTOS-Kernel-Heap4 
 )
 
 
