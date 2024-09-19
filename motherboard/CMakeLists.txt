@@ -14,6 +14,8 @@ include("../pico-sdk/external/pico_sdk_import.cmake")
 # Create the project called "pico_motherboard"
 project(pico_motherboard C CXX ASM)
 
+add_compile_definitions(DEBUG)
+
 pico_sdk_init()
 
 add_executable(${PROJECT_NAME}
@@ -34,6 +36,7 @@ target_link_libraries(${PROJECT_NAME}
     pico_stdlib 
     FreeRTOS-Kernel 
     FreeRTOS-Kernel-Heap4 
+    #tinyusb_device
 )
 
 
