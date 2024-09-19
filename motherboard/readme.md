@@ -11,10 +11,9 @@ When working on the code for the Pi Pico, you must have the pic-sdk downloaded i
 
 In the root directory, `./urc-2023`, run the following commands to download the pico-sdk. 
 
-`git submodule init` -> This initializes your local configuration file
+`git submodule update --init --recursive` -> This downloads the submodule and any submodules that they have
 
-`git submodule update` -> Fetches all the data from the pico-sdk repo
-
+You might have to run ` git submodule add --force https://github.com/FreeRTOS/FreeRTOS-Kernel.git` if the previous command did not download the `FreeRTOS-Kernel`
 #
 
 Now set up the development environment in the `/motherboard` directory. Run the following commands.
