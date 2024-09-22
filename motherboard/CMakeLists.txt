@@ -21,6 +21,7 @@ pico_sdk_init()
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/dataInUSB.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dataOutUSB.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 

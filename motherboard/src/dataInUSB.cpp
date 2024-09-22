@@ -1,6 +1,7 @@
 #include "../include/dataInUSB.hpp"
+#include "../include/dataOutUSB.hpp"
 
-#define MAX_INPUT_BUFFER 200
+#define MAX_INPUT_BUFFER 20
 
 DataInUSB::DataInUSB(){
 
@@ -8,7 +9,8 @@ DataInUSB::DataInUSB(){
 
 void DataInUSB::printUSBMessageInt(char* msg){
     for (int index = 0; index < MAX_INPUT_BUFFER; index++){
-        printf("[%d] = (%d)%c\n", index, (int)msg[index], msg[index]);
+        //std::string* str = new std::string( "[" + std::to_string(index) + "] = " + "(" + std::to_string((int)msg[index]) + ")" + msg[index] + "\n");
+        //DataOutUSB::getObject()->writeToHost(str);
     }
 }
 
@@ -35,23 +37,30 @@ void DataInUSB::printUSBMessageInt(char* msg){
     std::string commandID = stringMessage.substr(indexOfCarriageFeed, indexOfFirstSpace - indexOfCarriageFeed);
     printf("subtr[%d]: %s\n", commandID.size(), commandID.c_str());
 
+    //DataOutUSB::getObject()->writeToHost("what am i doing");
+
 
     MessageInContainer* messageCOntainer;
 
     if (commandID == "stepper") {
-        printf("stepper message\n");
+        //std::string* str = new std::string("stepper message\n");
+        DataOutUSB::getObject()->writeToHost("stepper message\n");
     }
     else if (commandID == "pwm"){
-        printf("pwm message\n");
+        //std::string* str = new std::string("pwm message\n");
+        DataOutUSB::getObject()->writeToHost("pwm message\n");
     }
     else if(commandID == "light"){
-        printf("light message\n");
+        //std::string* str = new std::string("light message\n");
+        DataOutUSB::getObject()->writeToHost("light message\n");
     }
     else if(commandID == "config"){
-        printf("config message\n");
+        //std::string* str = new std::string("config message\n");
+        DataOutUSB::getObject()->writeToHost("config message\n");
     }
     else {
-        printf("Unknown message\n");
+        //std::string* str = new std::string("unkown message\n");
+        DataOutUSB::getObject()->writeToHost("unkown message\n");
     }
 
     //printf("%s\n", inputBuffer);

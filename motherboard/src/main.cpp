@@ -11,17 +11,17 @@
 #include "queue.h"
 
 #include "../include/dataInUSB.hpp"
+#include "../include/dataOutUSB.hpp"
 
 
 
-TaskHandle_t usbCommTaskHandle;
+TaskHandle_t usbInTaskHandle;
+TaskHandle_t usbOutTaskHandle;
 
-void usbComm(void *param)
+QueueHandle_t dataToHostQueue;
+
+void usbDataIn(void *param)
 {
-    sleep_ms(500);
-    printf("usbComm");
-    sleep_ms(500);
-
     while (!stdio_usb_connected())
     {
         sleep_ms(100);
@@ -30,35 +30,31 @@ void usbComm(void *param)
 
     DataInUSB dataIn;
 
+    int counter = 0;
+
     while (true){
-        sleep_ms(500);
         printf("Enter String: ");
-        sleep_ms(500);
 
         dataIn.readNextUSBMessage();
 
+        // std::string* heapstr = new std::string("what am I doing" + std::to_string(counter++) + "\n");
+        // DataOutUSB::getObject()->writeToHost(heapstr);
 
-        char buf[15];
-        //scanf("%*s",buf);
-        //fgets(buf, sizeof(buf),stdin);
-        // if(fgets(buf, sizeof(buf),stdin) != NULL){
-        //     for (int index = 0; index < 15; index++) {
-        //         //printf("buf[%d] = %d\n", index, (int)buf[index]);
-        //         printf("[%d] = (%d)%c\n", index, (int)buf[index], buf[index]);
-        //     }
+        printf("\n");
+    }
+}
 
-        // }
-        // else {
-        //     printf("NULL\n");
-        // }
+void usbDataOut(void *param){
+    while (!stdio_usb_connected())
+    {
+        sleep_ms(200);
+    }
 
+    DataOutUSB usbOut;
 
-        // printf("Output: %s\n", buf);
-        // printf("\n");
-
-        
-
-        sleep_ms(500);
+    while(true){
+        DataOutUSB::getObject()->publish();
+        sleep_ms(2);
     }
 }
 
@@ -89,8 +85,8 @@ int main(int argc, char** argv) {
         tenSecDebugLED();
     #endif
 
-
-    xTaskCreate(usbComm, "USB_COMM_TASK", configMINIMAL_STACK_SIZE * 2, NULL, 1, &usbCommTaskHandle);
+    xTaskCreate(usbDataIn, "USB_DATA_IN", configMINIMAL_STACK_SIZE * 2, NULL, 1, &usbInTaskHandle);
+    xTaskCreate(usbDataOut, "USB_DATA_OUT", configMINIMAL_STACK_SIZE * 2, NULL, 2, &usbOutTaskHandle);
 
     vTaskStartScheduler();
 
