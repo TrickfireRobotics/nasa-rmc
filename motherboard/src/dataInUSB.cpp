@@ -1,7 +1,7 @@
 #include "../include/dataInUSB.hpp"
 #include "../include/dataOutUSB.hpp"
 
-#define MAX_INPUT_BUFFER 20
+#define MAX_INPUT_BUFFER 200
 
 DataInUSB::DataInUSB(){
 
