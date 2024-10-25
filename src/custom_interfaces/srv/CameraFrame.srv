@@ -1,0 +1,3 @@
+int64 input
+---
+sensor_msgs/CompressedImage frame
