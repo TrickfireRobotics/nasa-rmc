@@ -17,6 +17,7 @@ find_package(sensor_msgs REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/ArmMode.srv"
   "srv/CameraFrame.srv"
+  DEPENDENCIES builtin_interfaces sensor_msgs
  )
 
 if(BUILD_TESTING)
