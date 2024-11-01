@@ -8,9 +8,9 @@ from pathlib import Path
 from typing import Any
 from custom_interfaces.srv import CameraFrame
 
-# test usb port ID
-import sys
-import usb.core
+# # test usb port ID
+# import sys
+# import usb.core
 
 """
 Function returns a list of working camera IDs to capture every camera connected to the robot
@@ -88,15 +88,15 @@ def main(args=None):
         nodes = []
         cameraNumber = 0
 
-        # testing pyusb example code
-        dev = usb.core.find(find_all=True)
-        for cfg in dev:
-            sys.stdout.write('Decimal VendorID=' +
-                             str(cfg.idVendor) + ' & ProductID=' +
-                             str(cfg.idProduct) + '\n')
-            sys.stdout.write('Hexadecimal VendorID=' +
-                             hex(cfg.idVendor) + ' & ProductID=' +
-                             hex(cfg.idProduct) + '\n\n')
+        # # testing pyusb example code
+        # dev = usb.core.find(find_all=True)
+        # for cfg in dev:
+        #     sys.stdout.write('Decimal VendorID=' +
+        #                      str(cfg.idVendor) + ' & ProductID=' +
+        #                      str(cfg.idProduct) + '\n')
+        #     sys.stdout.write('Hexadecimal VendorID=' +
+        #                      hex(cfg.idVendor) + ' & ProductID=' +
+        #                      hex(cfg.idProduct) + '\n\n')
 
         for cameraID in getCameras():
             node = RosCamera("get_video_frames" + str(cameraNumber), cameraID)
