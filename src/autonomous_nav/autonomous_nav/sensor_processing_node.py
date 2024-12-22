@@ -7,7 +7,7 @@ class SensorProcessingNode(Node):
     def __init__(self):
         super().__init__("sensor_processing_node")
 
-        # Subscription to lidar data
+        # Subscription to lidar data, by listening to the topic /lidar_scan
         self.lidar_subscription = self.create_subscription(
             LaserScan, "/lidar_scan", self.lidar_callback, 10
         )
